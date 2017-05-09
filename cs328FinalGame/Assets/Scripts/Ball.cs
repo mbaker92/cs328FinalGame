@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour {
 
@@ -32,7 +33,12 @@ public class Ball : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        if (MainDriver.lives <= 0)
+        {
+            MainDriver.lives = 5;
+            // Restart level
+ 
+        }
 
 	}
 
@@ -40,6 +46,7 @@ public class Ball : MonoBehaviour {
     {
         if(collision.gameObject.tag == "Wall")
         {
+            MainDriver.lives -= 1;
             Debug.Log("Hit the Barrier");
         }
         
