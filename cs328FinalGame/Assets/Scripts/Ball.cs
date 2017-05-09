@@ -12,12 +12,20 @@ public class Ball : MonoBehaviour {
 
     public Vector3 initialImpulse;
     public GameObject ball;
+
+    //Sound effect Variables
+    public AudioClip bounceSound;
+    private AudioSource source;
+
 	// Use this for initialization
 	void Start () {
         sx = Random.Range(0, 2) == 0 ? -1 : 1;
         sz = Random.Range(0, 2) == 0 ? -1 : 1;
 
         ball.GetComponent<Rigidbody>().velocity = new Vector3(Random.Range(5, 10) * sx, 0, Random.Range(5, 10) * sz);
+
+        //Get sound file
+        source = GetComponent<AudioSource>();
 
         //ball.GetComponent<Rigidbody>().AddForce(initialImpulse, ForceMode.Impulse);
 	}
@@ -39,6 +47,9 @@ public class Ball : MonoBehaviour {
         {
             Debug.Log("Hit a Paddle");
             MainDriver.CurrentScore += 5;
+
+            //Play sound effect
+            source.PlayOneShot(bounceSound, 1F);
         }
 
 
