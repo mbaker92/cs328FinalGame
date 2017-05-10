@@ -8,10 +8,19 @@ public class MainDriver : MonoBehaviour {
 
     public Text Score;
     public Text Lives;
+    //public Text butt;
     public static int CurrentScore;
     public static int lives = 5;
     public GameObject[] Paddle;
     KeyCode[] Keys = new KeyCode[24];
+
+    KeyCode change1 = KeyCode.Keypad5;
+    KeyCode change2 = KeyCode.Keypad9;
+
+
+    //public static int pressedKeys;
+
+
 
 
     //Sound effect Variables
@@ -30,11 +39,30 @@ public class MainDriver : MonoBehaviour {
         {
             Paddle[i].SetActive(false);        
         }
+
+        //Level 0
         setKeycodes();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+        //Level 1
+        if(Input.GetKeyDown(change1))
+        {
+            Debug.Log("Change Keys 1");
+
+            setKeycodes1();
+        }
+
+        //Level 2
+        if (Input.GetKeyDown(change2))
+        {
+            Debug.Log("Change Keys 2");
+
+            setKeycodes2();
+        }
+        // pressedKeys = 0;
 
         if (lives <= 0)
         {
@@ -43,12 +71,15 @@ public class MainDriver : MonoBehaviour {
 
         Score.text = "Score : " + CurrentScore.ToString();
         Lives.text = "Lives Left: " + lives.ToString();
+       // butt.text = "Key Pressed: " + pressedKeys.ToString();
+
         // 24 Paddles
         for (int i = 0; i < 24; i++)
         {
             // Array of keycodes used to compare which key is pressed
-            if (Input.GetKeyDown(Keys[i]))
+            if (Input.GetKeyDown(Keys[i]) )
             {
+                //pressedKeys++;
                 //Play sound effect
                 source.PlayOneShot(keypressSound, 1F);
                 Paddle[i].SetActive(true);
@@ -60,6 +91,7 @@ public class MainDriver : MonoBehaviour {
         }
     }
 
+    //Level 0
     private void setKeycodes()
     {
         for (int i = 0; i < 24; i++)
@@ -68,4 +100,22 @@ public class MainDriver : MonoBehaviour {
         }
     }
 
- }
+    //Level 1
+    private void setKeycodes1()
+    {
+        for (int i = 0; i < 24; i++)
+        {
+            Keys[i] = (KeyCode.B + i);
+        }
+    }
+
+    //Level 2
+    private void setKeycodes2()
+    {
+        for (int i = 0; i < 24; i++)
+        {
+            Keys[i] = (KeyCode.Z - i);
+        }
+    }
+
+}
