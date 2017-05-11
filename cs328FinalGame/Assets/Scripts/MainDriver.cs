@@ -79,24 +79,24 @@ public class MainDriver : MonoBehaviour {
         }
 
         Score.text = "Score : " + CurrentScore.ToString();
-       // butt.text = "Key Pressed: " + pressedKeys.ToString();
+        // butt.text = "Key Pressed: " + pressedKeys.ToString();
 
         // 24 Paddles
-   //     for (int i = 0; i < 24; i++)
-//        {
+        for (int i = 0; i < 24; i++)
+        {
             // Array of keycodes used to compare which key is pressed
-            if (Input.GetKeyDown(KeyCode.A) )
+            if (Input.GetKeyDown(Keys[i]))
             {
                 //pressedKeys++;
                 //Play sound effect
                 source.PlayOneShot(keypressSound, 1F);
-                Paddle[0].SetActive(true);
+                Paddle[i].SetActive(true);
             }
-            if (Input.GetKeyUp(KeyCode.A))
+            if (Input.GetKeyUp(Keys[i]))
             {
-                Paddle[0].SetActive(false);
+                Paddle[i].SetActive(false);
             }
-        
+        }
     }
 
     //Level 0
