@@ -46,7 +46,10 @@ public class Ball : MonoBehaviour {
     {
         if(collision.gameObject.tag == "Wall")
         {
+
+            
             MainDriver.lives -= 1;
+
             Debug.Log("Hit the Barrier");
         }
         

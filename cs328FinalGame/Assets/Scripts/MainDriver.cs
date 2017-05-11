@@ -11,6 +11,8 @@ public class MainDriver : MonoBehaviour {
     //public Text butt;
     public static int CurrentScore;
     public static int lives = 5;
+    public Image[] LifeSprite = new Image[5];
+
     public GameObject[] Paddle;
     KeyCode[] Keys = new KeyCode[24];
 
@@ -42,13 +44,20 @@ public class MainDriver : MonoBehaviour {
 
         //Level 0
         setKeycodes();
+        for(int i=0; i<5; i++)
+        {
+            LifeSprite[i].enabled = true;
+        }
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
+        checkLives();
+
         //Level 1
-        if(Input.GetKeyDown(change1))
+        if (Input.GetKeyDown(change1))
         {
             Debug.Log("Change Keys 1");
 
@@ -70,25 +79,24 @@ public class MainDriver : MonoBehaviour {
         }
 
         Score.text = "Score : " + CurrentScore.ToString();
-        Lives.text = "Lives Left: " + lives.ToString();
        // butt.text = "Key Pressed: " + pressedKeys.ToString();
 
         // 24 Paddles
-        for (int i = 0; i < 24; i++)
-        {
+   //     for (int i = 0; i < 24; i++)
+//        {
             // Array of keycodes used to compare which key is pressed
-            if (Input.GetKeyDown(Keys[i]) )
+            if (Input.GetKeyDown(KeyCode.A) )
             {
                 //pressedKeys++;
                 //Play sound effect
                 source.PlayOneShot(keypressSound, 1F);
-                Paddle[i].SetActive(true);
+                Paddle[0].SetActive(true);
             }
-            if (Input.GetKeyUp(Keys[i]))
+            if (Input.GetKeyUp(KeyCode.A))
             {
-                Paddle[i].SetActive(false);
+                Paddle[0].SetActive(false);
             }
-        }
+        
     }
 
     //Level 0
@@ -116,6 +124,19 @@ public class MainDriver : MonoBehaviour {
         {
             Keys[i] = (KeyCode.Z - i);
         }
+    }
+
+    private void checkLives()
+    {
+        switch (lives)
+        {
+            case 0: LifeSprite[4].enabled = false; break;
+            case 1: LifeSprite[3].enabled = false; break;
+            case 2: LifeSprite[2].enabled = false; break;
+            case 3: LifeSprite[1].enabled = false; break;
+            case 4: LifeSprite[0].enabled = false; break;
+        }
+
     }
 
 }
