@@ -16,6 +16,7 @@ public class Ball : MonoBehaviour {
 
     //Sound effect Variables
     public AudioClip bounceSound;
+    public AudioClip wallSound;
     private AudioSource source;
 
 	// Use this for initialization
@@ -51,6 +52,9 @@ public class Ball : MonoBehaviour {
             MainDriver.lives -= 1;
 
             Debug.Log("Hit the Barrier");
+
+            //Play sound effect
+            source.PlayOneShot(wallSound, 1F);
         }
         
         if(collision.gameObject.tag == "Paddle")
